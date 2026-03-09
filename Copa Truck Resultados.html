@@ -1,0 +1,373 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Copa Truck Be8 BeVant 2026 – Resultados Etapa 1</title>
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@400;700;800;900&family=Barlow:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    background: #0e0e0e;
+    color: #f0f0f0;
+    font-family: 'Barlow', sans-serif;
+    min-height: 100vh;
+  }
+  ::-webkit-scrollbar { height: 5px; width: 5px; background: #1a1a1a; }
+  ::-webkit-scrollbar-thumb { background: #e8b800; border-radius: 3px; }
+
+  /* HEADER */
+  .header {
+    background: linear-gradient(135deg, #0e0e0e 0%, #1a1800 60%, #0e0e0e 100%);
+    border-bottom: 3px solid #e8b800;
+    padding: 2.5rem 2rem 2rem;
+    position: relative;
+    overflow: hidden;
+  }
+  .header::before {
+    content: '';
+    position: absolute;
+    top: -40px; right: -40px;
+    width: 400px; height: 300px;
+    background: radial-gradient(ellipse, rgba(232,184,0,0.1) 0%, transparent 65%);
+    pointer-events: none;
+  }
+  .header-inner { max-width: 1100px; margin: 0 auto; position: relative; }
+  .header-eyebrow {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 0.72rem; letter-spacing: 0.22em;
+    color: #e8b800; font-weight: 700; margin-bottom: 0.4rem;
+  }
+  .header h1 {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: clamp(1.8rem, 5vw, 3.4rem);
+    font-weight: 900; letter-spacing: -0.01em; line-height: 1.05;
+    color: #fff;
+  }
+  .header-sub { margin-top: 0.6rem; color: #888; font-size: 0.9rem; }
+  .header-location {
+    display: inline-flex; align-items: center; gap: 6px;
+    margin-top: 0.5rem;
+    background: rgba(232,184,0,0.1);
+    border: 1px solid rgba(232,184,0,0.3);
+    padding: 4px 12px; border-radius: 3px;
+    font-size: 0.78rem; color: #e8b800; font-weight: 600;
+    letter-spacing: 0.06em;
+  }
+
+  /* CONTENT */
+  .content { max-width: 1100px; margin: 0 auto; padding: 2.5rem 1.5rem 4rem; }
+
+  /* CATEGORY DIVIDER */
+  .category-header {
+    display: flex; align-items: center; gap: 1rem;
+    margin: 2.5rem 0 1.5rem;
+  }
+  .category-label {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 0.68rem; letter-spacing: 0.2em;
+    color: #e8b800; font-weight: 700;
+    background: rgba(232,184,0,0.08);
+    border: 1px solid rgba(232,184,0,0.25);
+    padding: 4px 12px; border-radius: 2px;
+  }
+  .category-line { flex: 1; height: 1px; background: #2a2a2a; }
+
+  /* SECTION HEADER */
+  .section-title {
+    display: flex; align-items: center; gap: 1rem;
+    border-bottom: 2px solid #e8b800;
+    padding-bottom: 0.6rem; margin-bottom: 1.2rem;
+  }
+  .section-badge {
+    background: #e8b800; color: #111;
+    font-family: 'Barlow Condensed', sans-serif;
+    font-weight: 800; font-size: 1.1rem;
+    padding: 4px 16px; letter-spacing: 0.08em;
+  }
+  .section-meta { color: #888; font-size: 0.85rem; }
+
+  /* TABLE */
+  .table-wrap { overflow-x: auto; margin-bottom: 3rem; }
+  table { width: 100%; border-collapse: collapse; font-size: 0.88rem; }
+  thead tr { background: #1a1a1a; }
+  thead th {
+    padding: 9px 12px; text-align: left;
+    color: #e8b800;
+    font-family: 'Barlow Condensed', sans-serif;
+    font-weight: 700; font-size: 0.72rem; letter-spacing: 0.14em;
+    white-space: nowrap;
+  }
+  tbody tr { transition: background 0.15s; }
+  tbody tr:nth-child(odd)  { background: #161616; }
+  tbody tr:nth-child(even) { background: #191919; }
+  tbody tr:hover { background: #202020; }
+  tbody td { padding: 9px 12px; white-space: nowrap; }
+
+  .td-pos {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-weight: 800; font-size: 1.15rem;
+  }
+  .pos-1     { color: #e8b800; }
+  .pos-dnf   { color: #cc4444; }
+  .pos-default { color: #777; }
+
+  .td-driver { font-weight: 600; color: #f0f0f0; }
+  .td-team   { color: #aaa; font-size: 0.83rem; }
+  .td-gap {
+    font-family: 'Barlow Condensed', sans-serif;
+    letter-spacing: 0.02em;
+  }
+  .gap-1st  { color: #e8b800; font-weight: 700; }
+  .gap-dnf  { color: #cc4444; }
+  .gap-norm { color: #ccc; }
+
+  tr.dnf-row { opacity: 0.55; }
+  tr.win-row td:first-child { border-left: 3px solid #e8b800; }
+
+  /* Brand tags */
+  .brand {
+    display: inline-block;
+    font-size: 0.6rem; padding: 2px 6px; border-radius: 3px;
+    font-weight: 700; letter-spacing: 0.05em; color: #fff;
+  }
+  .brand-vw { background: #009DE0; }
+  .brand-mb { background: #00A19B; }
+  .brand-iv { background: #E04403; }
+
+  /* HIGHLIGHTS */
+  tr.row-dmais {
+    background: linear-gradient(90deg, #071524 0%, #161616 100%) !important;
+    border-left: 3px solid #3a8fd8;
+  }
+  tr.row-usual {
+    background: linear-gradient(90deg, #1e0800 0%, #161616 100%) !important;
+    border-left: 3px solid #E04403;
+  }
+  tr.row-dmais:hover { background: linear-gradient(90deg, #0a1e30 0%, #1e1e1e 100%) !important; }
+  tr.row-usual:hover { background: linear-gradient(90deg, #2a0f04 0%, #1e1e1e 100%) !important; }
+
+  .badge-team {
+    display: inline-block; margin-left: 8px;
+    font-size: 0.62rem; padding: 2px 6px; border-radius: 3px;
+    font-weight: 700; letter-spacing: 0.06em; color: #fff;
+    vertical-align: middle;
+  }
+  .badge-dmais { background: #3a8fd8; }
+  .badge-usual { background: #E04403; }
+
+  /* CHAMPIONSHIP */
+  .legend {
+    display: flex; gap: 1.5rem; margin-bottom: 1rem; flex-wrap: wrap;
+  }
+  .legend-item { display: flex; align-items: center; gap: 8px; font-size: 0.8rem; color: #aaa; }
+  .legend-dot {
+    width: 14px; height: 14px; border-radius: 3px;
+    border: 2px solid transparent;
+  }
+  .legend-dmais { background: rgba(58,143,216,0.2); border-color: #3a8fd8; }
+  .legend-usual { background: rgba(224,68,3,0.2);   border-color: #E04403; }
+
+  .pts {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-weight: 800; font-size: 1.1rem;
+  }
+  .pts-1st   { color: #e8b800; }
+  .pts-dmais { color: #3a8fd8; }
+  .pts-usual { color: #E04403; }
+  .pts-norm  { color: #f0f0f0; }
+
+  .bar-wrap {
+    width: 130px; height: 6px;
+    background: #222; border-radius: 3px; overflow: hidden;
+  }
+  .bar-fill {
+    height: 100%; border-radius: 3px;
+    animation: barGrow 1.2s ease forwards;
+  }
+  @keyframes barGrow { from { width: 0 !important; } }
+
+  .bar-1st   { background: #e8b800; }
+  .bar-dmais { background: #3a8fd8; }
+  .bar-usual { background: #E04403; }
+  .bar-norm  { background: #444; }
+
+  .footnote {
+    margin-top: 2rem; padding: 1rem 1.2rem;
+    background: #141414; border-left: 3px solid #2a2a2a;
+    font-size: 0.78rem; color: #555;
+  }
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<header class="header">
+  <div class="header-inner">
+    <div class="header-eyebrow">COPA TRUCK BE8 BEVANT · TEMPORADA 2026 · SUPER TRUCK PRO</div>
+    <h1>ETAPA 1 — CAMPO GRANDE</h1>
+    <p class="header-sub">Resultados oficiais · Corridas 1 e 2</p>
+    <div class="header-location">📍 Autódromo Internacional Orlando Moura · Campo Grande (MS)</div>
+  </div>
+</header>
+
+<main class="content">
+
+  <!-- CORRIDA 1 -->
+  <div class="section-title">
+    <span class="section-badge">CORRIDA 1</span>
+    <span class="section-meta">13 voltas · 28min09s204</span>
+  </div>
+  <div class="table-wrap">
+    <table>
+      <thead>
+        <tr><th>POS</th><th>PILOTO</th><th>EQUIPE</th><th>MARCA</th><th>TEMPO / INTERVALO</th></tr>
+      </thead>
+      <tbody>
+        <tr class="win-row">
+          <td class="td-pos pos-1">1º</td><td class="td-driver">Leandro Totti</td><td class="td-team">Vannucci Racing</td><td><span class="brand brand-iv">Iveco</span></td><td class="td-gap gap-1st">28min09s204</td>
+        </tr>
+        <tr><td class="td-pos pos-default">2º</td><td class="td-driver">Felipe Giaffone</td><td class="td-team">R9 Competições</td><td><span class="brand brand-vw">Volkswagen</span></td><td class="td-gap gap-norm">+6s359</td></tr>
+        <tr><td class="td-pos pos-default">3º</td><td class="td-driver">Paulo Salustiano</td><td class="td-team">Full Time</td><td><span class="brand brand-mb">Mercedes-Benz</span></td><td class="td-gap gap-norm">+6s909</td></tr>
+        <tr><td class="td-pos pos-default">4º</td><td class="td-driver">Pedro Perdoncini</td><td class="td-team">Full Time</td><td><span class="brand brand-mb">Mercedes-Benz</span></td><td class="td-gap gap-norm">+10s359</td></tr>
+        <tr><td class="td-pos pos-default">5º</td><td class="td-driver">Bia Figueiredo</td><td class="td-team">Iveco Dakar Motorsport</td><td><span class="brand brand-iv">Iveco</span></td><td class="td-gap gap-norm">+11s272</td></tr>
+        <tr><td class="td-pos pos-default">6º</td><td class="td-driver">Danilo Alamini</td><td class="td-team">R9 Competições</td><td><span class="brand brand-vw">Volkswagen</span></td><td class="td-gap gap-norm">+18s430</td></tr>
+        <tr><td class="td-pos pos-default">7º</td><td class="td-driver">Felipe Tozzo</td><td class="td-team">Full Time</td><td><span class="brand brand-mb">Mercedes-Benz</span></td><td class="td-gap gap-norm">+25s201</td></tr>
+        <tr><td class="td-pos pos-default">8º</td><td class="td-driver">Adalberto Jardim</td><td class="td-team">PP Motorsport</td><td><span class="brand brand-mb">Mercedes-Benz</span></td><td class="td-gap gap-norm">+26s958</td></tr>
+        <tr><td class="td-pos pos-default">9º</td><td class="td-driver">Luiz Lopes</td><td class="td-team">PP Motorsport</td><td><span class="brand brand-mb">Mercedes-Benz</span></td><td class="td-gap gap-norm">+32s263</td></tr>
+        <tr class="row-usual">
+          <td class="td-pos" style="color:#E04403">10º</td><td class="td-driver" style="color:#fff;font-weight:700">Raphael Abbate<span class="badge-team badge-usual">USUAL</span></td><td class="td-team" style="color:#aaa">Iveco Usual Racing</td><td><span class="brand brand-iv">Iveco</span></td><td class="td-gap gap-norm">+32s956</td>
+        </tr>
+        <tr><td class="td-pos pos-default">11º</td><td class="td-driver">Evandro Camargo</td><td class="td-team">Tiger Team</td><td><span class="brand brand-mb">Mercedes-Benz</span></td><td class="td-gap gap-norm">+38s157</td></tr>
+        <tr><td class="td-pos pos-default">12º</td><td class="td-driver">Pedro Paulo Fernandes</td><td class="td-team">PP Motorsport</td><td><span class="brand brand-mb">Mercedes-Benz</span></td><td class="td-gap gap-norm">+44s238</td></tr>
+        <tr class="row-usual">
+          <td class="td-pos" style="color:#E04403">13º</td><td class="td-driver" style="color:#fff;font-weight:700">Danilo Dirani<span class="badge-team badge-usual">USUAL</span></td><td class="td-team" style="color:#aaa">Iveco Usual Racing</td><td><span class="brand brand-iv">Iveco</span></td><td class="td-gap gap-norm">+54s807</td>
+        </tr>
+        <tr><td class="td-pos pos-default">14º</td><td class="td-driver">Beto Monteiro</td><td class="td-team">R9 Competições</td><td><span class="brand brand-vw">Volkswagen</span></td><td class="td-gap gap-norm">+1 volta</td></tr>
+        <tr class="row-dmais">
+          <td class="td-pos" style="color:#3a8fd8">15º</td><td class="td-driver" style="color:#fff;font-weight:700">Wellington Cirino<span class="badge-team badge-dmais">DMAIS</span></td><td class="td-team" style="color:#aaa">DMais Motorsport</td><td><span class="brand brand-mb">Mercedes-Benz</span></td><td class="td-gap gap-norm">+2 voltas</td>
+        </tr>
+        <tr><td class="td-pos pos-default">16º</td><td class="td-driver">André Marques</td><td class="td-team">Full Time</td><td><span class="brand brand-mb">Mercedes-Benz</span></td><td class="td-gap gap-norm">+4 voltas</td></tr>
+        <tr><td class="td-pos pos-default">17º</td><td class="td-driver">Thiago Rizzo</td><td class="td-team">R9 Competições</td><td><span class="brand brand-vw">Volkswagen</span></td><td class="td-gap gap-norm">+4 voltas</td></tr>
+        <tr class="row-dmais">
+          <td class="td-pos" style="color:#3a8fd8">18º</td><td class="td-driver" style="color:#fff;font-weight:700">Arthur Scherer<span class="badge-team badge-dmais">DMAIS</span></td><td class="td-team" style="color:#aaa">DMais Motorsport</td><td><span class="brand brand-mb">Mercedes-Benz</span></td><td class="td-gap gap-norm">+4 voltas</td>
+        </tr>
+        <tr class="dnf-row row-dmais" style="opacity:0.5">
+          <td class="td-pos pos-dnf">—</td><td class="td-driver" style="font-weight:700">Jaidson Zini<span class="badge-team badge-dmais">DMAIS</span></td><td class="td-team">DMais Motorsport</td><td><span class="brand brand-mb">Mercedes-Benz</span></td><td class="td-gap gap-dnf">NC · –9 voltas</td>
+        </tr>
+        <tr class="dnf-row row-dmais" style="opacity:0.5">
+          <td class="td-pos pos-dnf">—</td><td class="td-driver" style="font-weight:700">Fabio Fogaça<span class="badge-team badge-dmais">DMAIS</span></td><td class="td-team">DMais Motorsport</td><td><span class="brand brand-mb">Mercedes-Benz</span></td><td class="td-gap gap-dnf">EXCLUÍDO</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- CORRIDA 2 -->
+  <div class="section-title">
+    <span class="section-badge">CORRIDA 2</span>
+    <span class="section-meta">8 voltas · 22min13s418</span>
+  </div>
+  <div class="table-wrap">
+    <table>
+      <thead>
+        <tr><th>POS</th><th>PILOTO</th><th>EQUIPE</th><th>MARCA</th><th>TEMPO / INTERVALO</th></tr>
+      </thead>
+      <tbody>
+        <tr class="win-row">
+          <td class="td-pos pos-1">1º</td><td class="td-driver">Felipe Giaffone</td><td class="td-team">R9 Competições</td><td><span class="brand brand-vw">Volkswagen</span></td><td class="td-gap gap-1st">22min13s418</td>
+        </tr>
+        <tr><td class="td-pos pos-default">2º</td><td class="td-driver">Adalberto Jardim</td><td class="td-team">PP Motorsport</td><td><span class="brand brand-mb">Mercedes-Benz</span></td><td class="td-gap gap-norm">+0s397</td></tr>
+        <tr><td class="td-pos pos-default">3º</td><td class="td-driver">Pedro Perdoncini</td><td class="td-team">Full Time</td><td><span class="brand brand-mb">Mercedes-Benz</span></td><td class="td-gap gap-norm">+2s834</td></tr>
+        <tr><td class="td-pos pos-default">4º</td><td class="td-driver">Beto Monteiro</td><td class="td-team">R9 Competições</td><td><span class="brand brand-vw">Volkswagen</span></td><td class="td-gap gap-norm">+3s054</td></tr>
+        <tr class="row-usual">
+          <td class="td-pos" style="color:#E04403">5º</td><td class="td-driver" style="color:#fff;font-weight:700">Danilo Dirani<span class="badge-team badge-usual">USUAL</span></td><td class="td-team" style="color:#aaa">Iveco Usual Racing</td><td><span class="brand brand-iv">Iveco</span></td><td class="td-gap gap-norm">+4s895</td>
+        </tr>
+        <tr class="row-usual">
+          <td class="td-pos" style="color:#E04403">6º</td><td class="td-driver" style="color:#fff;font-weight:700">Raphael Abbate<span class="badge-team badge-usual">USUAL</span></td><td class="td-team" style="color:#aaa">Iveco Usual Racing</td><td><span class="brand brand-iv">Iveco</span></td><td class="td-gap gap-norm">+7s501</td>
+        </tr>
+        <tr><td class="td-pos pos-default">7º</td><td class="td-driver">Luiz Lopes</td><td class="td-team">PP Motorsport</td><td><span class="brand brand-mb">Mercedes-Benz</span></td><td class="td-gap gap-norm">+11s295</td></tr>
+        <tr><td class="td-pos pos-default">8º</td><td class="td-driver">Evandro Camargo</td><td class="td-team">Tiger Team</td><td><span class="brand brand-mb">Mercedes-Benz</span></td><td class="td-gap gap-norm">+12s270</td></tr>
+        <tr><td class="td-pos pos-default">9º</td><td class="td-driver">Pedro Paulo Fernandes</td><td class="td-team">PP Motorsport</td><td><span class="brand brand-mb">Mercedes-Benz</span></td><td class="td-gap gap-norm">+12s718</td></tr>
+        <tr class="row-dmais">
+          <td class="td-pos" style="color:#3a8fd8">10º</td><td class="td-driver" style="color:#fff;font-weight:700">Wellington Cirino<span class="badge-team badge-dmais">DMAIS</span></td><td class="td-team" style="color:#aaa">DMais Motorsport</td><td><span class="brand brand-mb">Mercedes-Benz</span></td><td class="td-gap gap-norm">+21s190</td>
+        </tr>
+        <tr class="row-dmais">
+          <td class="td-pos" style="color:#3a8fd8">11º</td><td class="td-driver" style="color:#fff;font-weight:700">Arthur Scherer<span class="badge-team badge-dmais">DMAIS</span></td><td class="td-team" style="color:#aaa">DMais Motorsport</td><td><span class="brand brand-mb">Mercedes-Benz</span></td><td class="td-gap gap-norm">+37s325</td>
+        </tr>
+        <tr class="row-dmais">
+          <td class="td-pos" style="color:#3a8fd8">12º</td><td class="td-driver" style="color:#fff;font-weight:700">Fabio Fogaça<span class="badge-team badge-dmais">DMAIS</span></td><td class="td-team" style="color:#aaa">DMais Motorsport</td><td><span class="brand brand-mb">Mercedes-Benz</span></td><td class="td-gap gap-norm">+37s326</td>
+        </tr>
+        <tr class="dnf-row"><td class="td-pos pos-dnf">—</td><td class="td-driver">Bia Figueiredo</td><td class="td-team">Iveco Dakar Motorsport</td><td><span class="brand brand-iv">Iveco</span></td><td class="td-gap gap-dnf">NC · –3 voltas</td></tr>
+        <tr class="dnf-row"><td class="td-pos pos-dnf">—</td><td class="td-driver">Danilo Alamini</td><td class="td-team">R9 Competições</td><td><span class="brand brand-vw">Volkswagen</span></td><td class="td-gap gap-dnf">NC · –8 voltas</td></tr>
+        <tr class="dnf-row"><td class="td-pos pos-dnf">—</td><td class="td-driver">Paulo Salustiano</td><td class="td-team">Full Time</td><td><span class="brand brand-mb">Mercedes-Benz</span></td><td class="td-gap gap-dnf">NC · –8 voltas</td></tr>
+        <tr class="dnf-row"><td class="td-pos pos-dnf">—</td><td class="td-driver">Leandro Totti</td><td class="td-team">Vannucci Racing</td><td><span class="brand brand-iv">Iveco</span></td><td class="td-gap gap-dnf">NC · –8 voltas</td></tr>
+        <tr class="dnf-row"><td class="td-pos pos-dnf">—</td><td class="td-driver">André Marques</td><td class="td-team">Full Time</td><td><span class="brand brand-mb">Mercedes-Benz</span></td><td class="td-gap gap-dnf">NC · –8 voltas</td></tr>
+        <tr class="dnf-row"><td class="td-pos pos-dnf">—</td><td class="td-driver">Thiago Rizzo</td><td class="td-team">R9 Competições</td><td><span class="brand brand-vw">Volkswagen</span></td><td class="td-gap gap-dnf">NC · –8 voltas</td></tr>
+        <tr class="dnf-row row-dmais" style="opacity:0.5">
+          <td class="td-pos pos-dnf">—</td><td class="td-driver" style="font-weight:700">Jaidson Zini<span class="badge-team badge-dmais">DMAIS</span></td><td class="td-team">DMais Motorsport</td><td><span class="brand brand-mb">Mercedes-Benz</span></td><td class="td-gap gap-dnf">NÃO LARGOU</td>
+        </tr>
+        <tr class="dnf-row"><td class="td-pos pos-dnf">—</td><td class="td-driver">Felipe Tozzo</td><td class="td-team">Full Time</td><td><span class="brand brand-mb">Mercedes-Benz</span></td><td class="td-gap gap-dnf">EXCLUÍDO</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- CHAMPIONSHIP -->
+  <div class="section-title">
+    <span class="section-badge">CLASSIFICAÇÃO DO CAMPEONATO</span>
+    <span class="section-meta">* parcial</span>
+  </div>
+
+  <div class="legend">
+    <div class="legend-item"><div class="legend-dot legend-dmais"></div>DMais Motorsport</div>
+    <div class="legend-item"><div class="legend-dot legend-usual"></div>Iveco Usual Racing</div>
+  </div>
+
+  <div class="table-wrap">
+    <table>
+      <thead>
+        <tr><th>#</th><th>PILOTO</th><th>EQUIPE</th><th>PONTOS</th><th style="width:150px"></th></tr>
+      </thead>
+      <tbody>
+        <tr><td class="td-pos pos-1">1º</td><td class="td-driver">Felipe Giaffone</td><td class="td-team">R9 Competições</td><td class="pts pts-1st">40</td><td><div class="bar-wrap"><div class="bar-fill bar-1st" style="width:100%"></div></div></td></tr>
+        <tr><td class="td-pos pos-default">2º</td><td class="td-driver">Pedro Perdoncini</td><td class="td-team">Full Time</td><td class="pts pts-norm">30</td><td><div class="bar-wrap"><div class="bar-fill bar-norm" style="width:75%"></div></div></td></tr>
+        <tr><td class="td-pos pos-default">3º</td><td class="td-driver">Adalberto Jardim</td><td class="td-team">PP Motorsport</td><td class="pts pts-norm">28</td><td><div class="bar-wrap"><div class="bar-fill bar-norm" style="width:70%"></div></div></td></tr>
+        <tr><td class="td-pos pos-default">4º</td><td class="td-driver">Leandro Totti</td><td class="td-team">Vannucci Racing</td><td class="pts pts-norm">25</td><td><div class="bar-wrap"><div class="bar-fill bar-norm" style="width:62.5%"></div></div></td></tr>
+        <tr class="row-usual">
+          <td class="td-pos" style="color:#E04403">5º</td><td class="td-driver" style="color:#fff;font-weight:700">Raphael Abbate<span class="badge-team badge-usual">USUAL</span></td><td class="td-team" style="color:#aaa">Iveco Usual Racing</td><td class="pts pts-usual">20</td><td><div class="bar-wrap"><div class="bar-fill bar-usual" style="width:50%"></div></div></td>
+        </tr>
+        <tr><td class="td-pos pos-default">6º</td><td class="td-driver">Luiz Lopes</td><td class="td-team">PP Motorsport</td><td class="pts pts-norm">20</td><td><div class="bar-wrap"><div class="bar-fill bar-norm" style="width:50%"></div></div></td></tr>
+        <tr><td class="td-pos pos-default">7º</td><td class="td-driver">Paulo Salustiano</td><td class="td-team">Full Time</td><td class="pts pts-norm">18</td><td><div class="bar-wrap"><div class="bar-fill bar-norm" style="width:45%"></div></div></td></tr>
+        <tr><td class="td-pos pos-default">8º</td><td class="td-driver">Beto Monteiro</td><td class="td-team">R9 Competições</td><td class="pts pts-norm">18</td><td><div class="bar-wrap"><div class="bar-fill bar-norm" style="width:45%"></div></div></td></tr>
+        <tr class="row-usual">
+          <td class="td-pos" style="color:#E04403">9º</td><td class="td-driver" style="color:#fff;font-weight:700">Danilo Dirani<span class="badge-team badge-usual">USUAL</span></td><td class="td-team" style="color:#aaa">Iveco Usual Racing</td><td class="pts pts-usual">18</td><td><div class="bar-wrap"><div class="bar-fill bar-usual" style="width:45%"></div></div></td>
+        </tr>
+        <tr><td class="td-pos pos-default">10º</td><td class="td-driver">Evandro Camargo</td><td class="td-team">Tiger Team</td><td class="pts pts-norm">17</td><td><div class="bar-wrap"><div class="bar-fill bar-norm" style="width:42.5%"></div></div></td></tr>
+        <tr><td class="td-pos pos-default">11º</td><td class="td-driver">Bia Figueiredo</td><td class="td-team">Iveco Dakar Motorsport</td><td class="pts pts-norm">15</td><td><div class="bar-wrap"><div class="bar-fill bar-norm" style="width:37.5%"></div></div></td></tr>
+        <tr><td class="td-pos pos-default">12º</td><td class="td-driver">Pedro Paulo Fernandes</td><td class="td-team">PP Motorsport</td><td class="pts pts-norm">15</td><td><div class="bar-wrap"><div class="bar-fill bar-norm" style="width:37.5%"></div></div></td></tr>
+        <tr><td class="td-pos pos-default">13º</td><td class="td-driver">Danilo Alamini</td><td class="td-team">R9 Competições</td><td class="pts pts-norm">14</td><td><div class="bar-wrap"><div class="bar-fill bar-norm" style="width:35%"></div></div></td></tr>
+        <tr><td class="td-pos pos-default">14º</td><td class="td-driver">Felipe Tozzo</td><td class="td-team">Full Time</td><td class="pts pts-norm">13</td><td><div class="bar-wrap"><div class="bar-fill bar-norm" style="width:32.5%"></div></div></td></tr>
+        <tr class="row-dmais">
+          <td class="td-pos" style="color:#3a8fd8">15º</td><td class="td-driver" style="color:#fff;font-weight:700">Wellington Cirino<span class="badge-team badge-dmais">DMAIS</span></td><td class="td-team" style="color:#aaa">DMais Motorsport</td><td class="pts pts-dmais">11</td><td><div class="bar-wrap"><div class="bar-fill bar-dmais" style="width:27.5%"></div></div></td>
+        </tr>
+        <tr class="row-dmais">
+          <td class="td-pos" style="color:#3a8fd8">16º</td><td class="td-driver" style="color:#fff;font-weight:700">Arthur Scherer<span class="badge-team badge-dmais">DMAIS</span></td><td class="td-team" style="color:#aaa">DMais Motorsport</td><td class="pts pts-dmais">5</td><td><div class="bar-wrap"><div class="bar-fill bar-dmais" style="width:12.5%"></div></div></td>
+        </tr>
+        <tr class="row-dmais">
+          <td class="td-pos" style="color:#3a8fd8">17º</td><td class="td-driver" style="color:#fff;font-weight:700">Fabio Fogaça<span class="badge-team badge-dmais">DMAIS</span></td><td class="td-team" style="color:#aaa">DMais Motorsport</td><td class="pts pts-dmais">0</td><td><div class="bar-wrap"><div class="bar-fill bar-dmais" style="width:0%"></div></div></td>
+        </tr>
+        <tr><td class="td-pos pos-default">18º</td><td class="td-driver">André Marques</td><td class="td-team">Full Time</td><td class="pts pts-norm">0</td><td><div class="bar-wrap"><div class="bar-fill bar-norm" style="width:0%"></div></div></td></tr>
+        <tr><td class="td-pos pos-default">19º</td><td class="td-driver">Thiago Rizzo</td><td class="td-team">R9 Competições</td><td class="pts pts-norm">0</td><td><div class="bar-wrap"><div class="bar-fill bar-norm" style="width:0%"></div></div></td></tr>
+        <tr class="row-dmais">
+          <td class="td-pos" style="color:#3a8fd8">20º</td><td class="td-driver" style="color:#fff;font-weight:700">Jaidson Zini<span class="badge-team badge-dmais">DMAIS</span></td><td class="td-team" style="color:#aaa">DMais Motorsport</td><td class="pts pts-dmais">0</td><td><div class="bar-wrap"><div class="bar-fill bar-dmais" style="width:0%"></div></div></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="footnote">
+    * Classificação parcial do campeonato · Super Truck PRO · Temporada 2026. Pontuação sujeita a revisão oficial.
+  </div>
+
+</main>
+</body>
+</html>
