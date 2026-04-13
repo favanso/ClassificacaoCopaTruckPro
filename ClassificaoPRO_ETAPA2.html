@@ -1,0 +1,807 @@
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Copa Truck PRO · Resultados Oficiais</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@400;700;800;900&family=Barlow:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
+      body {
+        min-height: 100vh;
+        background: #111;
+        color: #f0f0f0;
+        font-family: "Barlow", sans-serif;
+      }
+      ::-webkit-scrollbar {
+        height: 4px;
+        width: 4px;
+        background: #222;
+      }
+      ::-webkit-scrollbar-thumb {
+        background: #e8b800;
+        border-radius: 2px;
+      }
+
+      .header {
+        background: linear-gradient(135deg, #111 0%, #1a1a00 50%, #111 100%);
+        border-bottom: 3px solid #e8b800;
+        padding: 2rem 2rem 1.5rem;
+        position: relative;
+        overflow: hidden;
+      }
+      .header::after {
+        content: "";
+        position: absolute;
+        top: 0;
+        right: 0;
+        width: 300px;
+        height: 100%;
+        background: radial-gradient(
+          ellipse at right,
+          rgba(232, 184, 0, 0.08) 0%,
+          transparent 70%
+        );
+        pointer-events: none;
+      }
+      .header-inner {
+        max-width: 1100px;
+        margin: 0 auto;
+      }
+      .header-label {
+        font-family: "Barlow Condensed", sans-serif;
+        font-size: 0.72rem;
+        letter-spacing: 0.2em;
+        color: #e8b800;
+        font-weight: 700;
+        margin-bottom: 0.3rem;
+      }
+      .header h1 {
+        font-family: "Barlow Condensed", sans-serif;
+        font-size: clamp(2rem, 5vw, 3.5rem);
+        font-weight: 900;
+        letter-spacing: -0.01em;
+        line-height: 1;
+        color: #fff;
+      }
+      .header-sub {
+        margin-top: 0.5rem;
+        color: #888;
+        font-size: 0.9rem;
+      }
+
+      .content {
+        max-width: 1100px;
+        margin: 0 auto;
+        padding: 2rem 1.5rem;
+      }
+
+      .section-heading {
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+        margin-bottom: 1rem;
+        border-bottom: 2px solid #e8b800;
+        padding-bottom: 0.5rem;
+      }
+      .section-badge {
+        background: #e8b800;
+        color: #111;
+        font-family: "Barlow Condensed", sans-serif;
+        font-weight: 800;
+        font-size: 1.1rem;
+        padding: 4px 14px;
+        letter-spacing: 0.08em;
+      }
+      .section-meta {
+        color: #aaa;
+        font-size: 0.85rem;
+      }
+
+      .table-wrap {
+        overflow-x: auto;
+        margin-bottom: 2.5rem;
+      }
+      table {
+        width: 100%;
+        border-collapse: collapse;
+        font-size: 0.88rem;
+      }
+      thead tr {
+        background: #1a1a1a;
+      }
+      th {
+        padding: 8px 12px;
+        text-align: left;
+        color: #e8b800;
+        font-family: "Barlow Condensed", sans-serif;
+        font-weight: 700;
+        font-size: 0.72rem;
+        letter-spacing: 0.12em;
+        white-space: nowrap;
+      }
+      tbody tr.even {
+        background: #161616;
+      }
+      tbody tr.odd {
+        background: #191919;
+      }
+      tbody tr.dnf {
+        background: #1c1010;
+        opacity: 0.8;
+      }
+      tbody tr.dq {
+        background: #1c0a1c;
+        opacity: 0.8;
+      }
+      tbody tr.winner {
+        border-left: 3px solid #e8b800;
+      }
+      tbody tr.no-winner {
+        border-left: 3px solid transparent;
+      }
+      tbody tr.dmais-row {
+        background: linear-gradient(90deg, #0a1f3a 0%, #161616 100%);
+        border-left: 3px solid #3a8fd8;
+      }
+      tbody tr.usual-row {
+        background: linear-gradient(90deg, #2a0a00 0%, #161616 100%);
+        border-left: 3px solid #e04403;
+      }
+
+      td {
+        padding: 9px 12px;
+      }
+      td.pos {
+        font-family: "Barlow Condensed", sans-serif;
+        font-weight: 800;
+        font-size: 1.1rem;
+      }
+      td.driver {
+        font-weight: 600;
+        color: #f0f0f0;
+        white-space: nowrap;
+      }
+      td.team {
+        color: #bbb;
+        font-size: 0.83rem;
+        white-space: nowrap;
+      }
+      td.gap {
+        font-family: "Barlow Condensed", sans-serif;
+        letter-spacing: 0.02em;
+      }
+
+      .brand-tag {
+        color: #fff;
+        font-size: 0.6rem;
+        padding: 2px 6px;
+        border-radius: 3px;
+        font-weight: 700;
+        letter-spacing: 0.05em;
+        white-space: nowrap;
+      }
+      .pts-cell {
+        padding: 10px 0 10px 12px;
+        font-family: "Barlow Condensed", sans-serif;
+        font-weight: 800;
+        font-size: 1.1rem;
+      }
+      .bar-cell {
+        padding: 10px 12px 10px 0;
+        width: 140px;
+      }
+      .bar-bg {
+        height: 6px;
+        background: #222;
+        border-radius: 3px;
+        overflow: hidden;
+      }
+      .bar-fill {
+        height: 100%;
+        border-radius: 3px;
+        width: 0;
+        transition: width 1s ease;
+      }
+
+      .legend {
+        display: flex;
+        gap: 1.5rem;
+        margin-bottom: 1rem;
+        flex-wrap: wrap;
+      }
+      .legend-item {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        font-size: 0.8rem;
+        color: #aaa;
+      }
+      .legend-dot {
+        width: 16px;
+        height: 16px;
+        border-radius: 3px;
+        border: 2px solid;
+      }
+
+      .footnote {
+        margin-top: 2rem;
+        padding: 1rem 1.2rem;
+        background: #161616;
+        border-left: 3px solid #333;
+        font-size: 0.78rem;
+        color: #666;
+      }
+      .team-tag {
+        margin-left: 8px;
+        font-size: 0.65rem;
+        color: #fff;
+        padding: 2px 6px;
+        border-radius: 3px;
+        font-weight: 700;
+        letter-spacing: 0.05em;
+        vertical-align: middle;
+      }
+      .pole-tag {
+        margin-left: 8px;
+        font-size: 0.65rem;
+        color: #111;
+        background: #e8b800;
+        padding: 2px 6px;
+        border-radius: 3px;
+        font-weight: 700;
+        letter-spacing: 0.05em;
+        vertical-align: middle;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="header">
+      <div class="header-inner">
+        <div class="header-label">COPA TRUCK PRO · RESULTADOS OFICIAIS</div>
+        <h1>RESULTADOS &amp; CLASSIFICAÇÃO</h1>
+        <div class="header-sub">
+          Etapa 2 · Santa Cruz do Sul – RS · Temporada 2026 em andamento
+        </div>
+      </div>
+    </div>
+
+    <div class="content">
+      <div class="section-heading">
+        <span class="section-badge">CORRIDA 1</span>
+        <span class="section-meta">14 voltas · 27min18s607</span>
+      </div>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>POS</th>
+              <th>PILOTO</th>
+              <th>EQUIPE</th>
+              <th>MARCA</th>
+              <th>TEMPO/INTERVALO</th>
+            </tr>
+          </thead>
+          <tbody id="race1-body"></tbody>
+        </table>
+      </div>
+
+      <div class="section-heading">
+        <span class="section-badge">CORRIDA 2</span>
+        <span class="section-meta">11 voltas · 23min03s629</span>
+      </div>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>POS</th>
+              <th>PILOTO</th>
+              <th>EQUIPE</th>
+              <th>MARCA</th>
+              <th>TEMPO/INTERVALO</th>
+            </tr>
+          </thead>
+          <tbody id="race2-body"></tbody>
+        </table>
+      </div>
+
+      <div class="section-heading">
+        <span class="section-badge">CLASSIFICAÇÃO DO CAMPEONATO</span>
+        <span class="section-meta">* parcial — após 2 etapas</span>
+      </div>
+      <div class="legend">
+        <div class="legend-item">
+          <div
+            class="legend-dot"
+            style="
+              background: linear-gradient(90deg, #0a1f3a, #161616);
+              border-color: #3a8fd8;
+            "
+          ></div>
+          DMais Motorsport
+        </div>
+        <div class="legend-item">
+          <div
+            class="legend-dot"
+            style="
+              background: linear-gradient(90deg, #2a0a00, #161616);
+              border-color: #e04403;
+            "
+          ></div>
+          Iveco Usual Racing
+        </div>
+      </div>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>#</th>
+              <th>PILOTO</th>
+              <th>EQUIPE</th>
+              <th>PONTOS</th>
+              <th></th>
+            </tr>
+          </thead>
+          <tbody id="champ-body"></tbody>
+        </table>
+      </div>
+
+      <div class="footnote">
+        * Classificação parcial após 2 etapas (Campo Grande e Santa Cruz do
+        Sul). Inclui +1 pt de pole position (Beto Monteiro, E2). Pontuação
+        sujeita a revisão.
+      </div>
+    </div>
+
+    <script>
+      const brandColors = {
+        Volkswagen: "#009DE0",
+        "Mercedes-Benz": "#00A19B",
+        Iveco: "#E04403",
+        Volvo: "#003057",
+        Scania: "#0f3476",
+      };
+
+      const race1Results = [
+        {
+          pos: 1,
+          driver: "Beto Monteiro",
+          team: "R9 Competições",
+          brand: "Volkswagen",
+          gap: "27min18s607",
+          pole: true,
+        },
+        {
+          pos: 2,
+          driver: "Danilo Dirani",
+          team: "Iveco Usual Racing",
+          brand: "Iveco",
+          gap: "+7s780",
+        },
+        {
+          pos: 3,
+          driver: "Raphael Abbate",
+          team: "ASG Motorsport",
+          brand: "Iveco",
+          gap: "+8s070",
+        },
+        {
+          pos: 4,
+          driver: "Paulo Salustiano",
+          team: "R9 Competições",
+          brand: "Mercedes-Benz",
+          gap: "+9s581",
+        },
+        {
+          pos: 5,
+          driver: "Andre Marques",
+          team: "R9 Competições",
+          brand: "Mercedes-Benz",
+          gap: "+12s679",
+        },
+        {
+          pos: 6,
+          driver: "Evandro Camargo",
+          team: "ASG Motorsport",
+          brand: "Mercedes-Benz",
+          gap: "+13s551",
+        },
+        {
+          pos: 7,
+          driver: "Bia Figueiredo",
+          team: "ASG Motorsport",
+          brand: "Iveco",
+          gap: "+14s320",
+        },
+        {
+          pos: 8,
+          driver: "Arthur Scherer",
+          team: "ASG Motorsport",
+          brand: "Mercedes-Benz",
+          gap: "+15s013",
+        },
+        {
+          pos: 9,
+          driver: "Felipe Tozzo",
+          team: "DMais Motorsport",
+          brand: "Mercedes-Benz",
+          gap: "+16s668",
+        },
+        {
+          pos: 10,
+          driver: "Pedro Perdoncini",
+          team: "ASG Motorsport",
+          brand: "Mercedes-Benz",
+          gap: "+19s406",
+        },
+        {
+          pos: 11,
+          driver: "Wellington Cirino",
+          team: "Iveco Usual Racing",
+          brand: "Mercedes-Benz",
+          gap: "+19s861",
+        },
+        {
+          pos: 12,
+          driver: "Danilo Alamini",
+          team: "R9 Competições",
+          brand: "Volkswagen",
+          gap: "+22s586",
+        },
+        {
+          pos: 13,
+          driver: "Thiago Rizzo",
+          team: "R9 Competições",
+          brand: "Volkswagen",
+          gap: "+25s257",
+        },
+        {
+          pos: 14,
+          driver: "Luiz Lopes",
+          team: "ASG Motorsport",
+          brand: "Mercedes-Benz",
+          gap: "+40s386",
+        },
+        {
+          pos: "—",
+          driver: "Jaidson Zini",
+          team: "ASG Motorsport",
+          brand: "Mercedes-Benz",
+          gap: "NC",
+          dnf: true,
+        },
+        {
+          pos: "—",
+          driver: "Leandro Totti",
+          team: "Vannucci Racing",
+          brand: "Iveco",
+          gap: "NC",
+          dnf: true,
+        },
+        {
+          pos: "—",
+          driver: "Pedro Paulo Fernandes",
+          team: "PP Motorsport",
+          brand: "Mercedes-Benz",
+          gap: "NC",
+          dnf: true,
+        },
+        {
+          pos: "—",
+          driver: "Adalberto Jardim",
+          team: "AJ5 Eco Sports",
+          brand: "Mercedes-Benz",
+          gap: "NC",
+          dnf: true,
+        },
+        {
+          pos: "DQ",
+          driver: "Felipe Giaffone",
+          team: "R9 Competições",
+          brand: "Volkswagen",
+          gap: "DQ",
+          dq: true,
+        },
+        {
+          pos: "DQ",
+          driver: "Fabio Fogaça",
+          team: "DMais Motorsport",
+          brand: "Mercedes-Benz",
+          gap: "DQ",
+          dq: true,
+        },
+      ];
+
+      const race2Results = [
+        {
+          pos: 1,
+          driver: "Andre Marques",
+          team: "R9 Competições",
+          brand: "Mercedes-Benz",
+          gap: "23min03s629",
+        },
+        {
+          pos: 2,
+          driver: "Beto Monteiro",
+          team: "R9 Competições",
+          brand: "Volkswagen",
+          gap: "+0s162",
+        },
+        {
+          pos: 3,
+          driver: "Danilo Dirani",
+          team: "Iveco Usual Racing",
+          brand: "Iveco",
+          gap: "+5s405",
+        },
+        {
+          pos: 4,
+          driver: "Felipe Tozzo",
+          team: "DMais Motorsport",
+          brand: "Mercedes-Benz",
+          gap: "+8s163",
+        },
+        {
+          pos: 5,
+          driver: "Raphael Abbate",
+          team: "ASG Motorsport",
+          brand: "Iveco",
+          gap: "+10s697",
+        },
+        {
+          pos: 6,
+          driver: "Arthur Scherer",
+          team: "ASG Motorsport",
+          brand: "Mercedes-Benz",
+          gap: "+11s163",
+        },
+        {
+          pos: 7,
+          driver: "Bia Figueiredo",
+          team: "ASG Motorsport",
+          brand: "Iveco",
+          gap: "+17s479",
+        },
+        {
+          pos: 8,
+          driver: "Thiago Rizzo",
+          team: "R9 Competições",
+          brand: "Volkswagen",
+          gap: "+18s359",
+        },
+        {
+          pos: 9,
+          driver: "Jaidson Zini",
+          team: "ASG Motorsport",
+          brand: "Mercedes-Benz",
+          gap: "+20s158",
+        },
+        {
+          pos: 10,
+          driver: "Pedro Perdoncini",
+          team: "ASG Motorsport",
+          brand: "Mercedes-Benz",
+          gap: "+32s501",
+        },
+        {
+          pos: 11,
+          driver: "Luiz Lopes",
+          team: "ASG Motorsport",
+          brand: "Mercedes-Benz",
+          gap: "+32s907",
+        },
+        {
+          pos: 12,
+          driver: "Wellington Cirino",
+          team: "Iveco Usual Racing",
+          brand: "Mercedes-Benz",
+          gap: "+50s329",
+        },
+        {
+          pos: 13,
+          driver: "Paulo Salustiano",
+          team: "R9 Competições",
+          brand: "Mercedes-Benz",
+          gap: "+1 volta",
+        },
+        {
+          pos: "—",
+          driver: "Danilo Alamini",
+          team: "R9 Competições",
+          brand: "Volkswagen",
+          gap: "5 Laps",
+          dnf: true,
+        },
+        {
+          pos: "—",
+          driver: "Evandro Camargo",
+          team: "ASG Motorsport",
+          brand: "Mercedes-Benz",
+          gap: "6 Laps",
+          dnf: true,
+        },
+        {
+          pos: "—",
+          driver: "Leandro Totti",
+          team: "Vannucci Racing",
+          brand: "Iveco",
+          gap: "NC",
+          dnf: true,
+        },
+        {
+          pos: "—",
+          driver: "Pedro Paulo Fernandes",
+          team: "PP Motorsport",
+          brand: "Mercedes-Benz",
+          gap: "NC",
+          dnf: true,
+        },
+        {
+          pos: "—",
+          driver: "Adalberto Jardim",
+          team: "AJ5 Eco Sports",
+          brand: "Mercedes-Benz",
+          gap: "NC",
+          dnf: true,
+        },
+        {
+          pos: "DQ",
+          driver: "Fabio Fogaça",
+          team: "DMais Motorsport",
+          brand: "Mercedes-Benz",
+          gap: "DQ",
+          dq: true,
+        },
+        {
+          pos: "DQ",
+          driver: "Felipe Giaffone",
+          team: "R9 Competições",
+          brand: "Volkswagen",
+          gap: "DQ",
+          dq: true,
+        },
+      ];
+
+      const championship = [
+        { driver: "Beto Monteiro", team: "R9 Competições", pts: 59 },
+        { driver: "Danilo Dirani", team: "Iveco Usual Racing", pts: 52 },
+        { driver: "Raphael Abbate", team: "ASG Motorsport", pts: 49 },
+        { driver: "Pedro Perdoncini", team: "ASG Motorsport", pts: 46 },
+        { driver: "Felipe Giaffone", team: "R9 Competições", pts: 40 },
+        { driver: "Andre Marques", team: "R9 Competições", pts: 39 },
+        { driver: "Paulo Salustiano", team: "R9 Competições", pts: 37 },
+        { driver: "Bia Figueiredo", team: "ASG Motorsport", pts: 37 },
+        { driver: "Felipe Tozzo", team: "DMais Motorsport", pts: 36 },
+        { driver: "Luiz Lopes", team: "ASG Motorsport", pts: 31 },
+        { driver: "Evandro Camargo", team: "ASG Motorsport", pts: 31 },
+        { driver: "Arthur Scherer", team: "ASG Motorsport", pts: 29 },
+        { driver: "Adalberto Jardim", team: "AJ5 Eco Sports", pts: 28 },
+        { driver: "Leandro Totti", team: "Vannucci Racing", pts: 24 },
+        { driver: "Wellington Cirino", team: "Iveco Usual Racing", pts: 24 },
+        { driver: "Danilo Alamini", team: "R9 Competições", pts: 22 },
+        { driver: "Thiago Rizzo", team: "R9 Competições", pts: 18 },
+        { driver: "Pedro Paulo Fernandes", team: "PP Motorsport", pts: 15 },
+        { driver: "Jaidson Zini", team: "ASG Motorsport", pts: 7 },
+        { driver: "Fabio Fogaça", team: "DMais Motorsport", pts: 4 },
+      ];
+
+      function brandTag(brand) {
+        const color = brandColors[brand] || "#555";
+        return `<span class="brand-tag" style="background:${color}">${brand}</span>`;
+      }
+
+      function renderRaceTable(bodyId, results) {
+        const tbody = document.getElementById(bodyId);
+        tbody.innerHTML = results
+          .map((r, i) => {
+            const isWinner = r.pos === 1;
+            const isDnf = r.dnf;
+            const isDq = r.dq;
+            let rowClass = isDq
+              ? "dq no-winner"
+              : isDnf
+                ? "dnf no-winner"
+                : i % 2 === 0
+                  ? "even"
+                  : "odd";
+            if (!isDnf && !isDq)
+              rowClass += " " + (isWinner ? "winner" : "no-winner");
+            const posColor = isWinner
+              ? "#e8b800"
+              : isDnf || isDq
+                ? "#cc4444"
+                : "#fff";
+            const gapColor = isDq
+              ? "#cc44cc"
+              : isDnf
+                ? "#cc4444"
+                : isWinner
+                  ? "#e8b800"
+                  : "#ccc";
+            const gapWeight = isWinner ? 700 : 400;
+            const poleTag = r.pole ? `<span class="pole-tag">POLE</span>` : "";
+            return `<tr class="${rowClass}">
+      <td class="pos" style="color:${posColor}">${r.pos}</td>
+      <td class="driver">${r.driver}${poleTag}</td>
+      <td class="team">${r.team}</td>
+      <td>${brandTag(r.brand)}</td>
+      <td class="gap" style="color:${gapColor};font-weight:${gapWeight}">${r.gap}</td>
+    </tr>`;
+          })
+          .join("");
+      }
+
+      function renderChampionship() {
+        const maxPts = Math.max(...championship.map((r) => r.pts)) || 1;
+        const tbody = document.getElementById("champ-body");
+        tbody.innerHTML = championship
+          .map((r, i) => {
+            const isDMais = r.team === "DMais Motorsport";
+            const isUsual = r.team === "Iveco Usual Racing";
+            const isFirst = i === 0;
+            let rowClass = isDMais
+              ? "dmais-row"
+              : isUsual
+                ? "usual-row"
+                : i % 2 === 0
+                  ? "even no-winner"
+                  : "odd no-winner";
+            const posColor = isFirst
+              ? "#e8b800"
+              : isDMais
+                ? "#3a8fd8"
+                : isUsual
+                  ? "#E04403"
+                  : "#888";
+            const ptsColor = isFirst
+              ? "#e8b800"
+              : isDMais
+                ? "#3a8fd8"
+                : isUsual
+                  ? "#E04403"
+                  : "#f0f0f0";
+            const barColor = isFirst
+              ? "#e8b800"
+              : isDMais
+                ? "#3a8fd8"
+                : isUsual
+                  ? "#E04403"
+                  : "#555";
+            const barWidth = (r.pts / maxPts) * 100;
+            const tagHtml = isDMais
+              ? `<span class="team-tag" style="background:#3a8fd8">DMAIS</span>`
+              : isUsual
+                ? `<span class="team-tag" style="background:#E04403">USUAL</span>`
+                : "";
+            return `<tr class="${rowClass}">
+      <td class="pos" style="color:${posColor}">${i + 1}º</td>
+      <td class="driver">${r.driver}${tagHtml}</td>
+      <td class="team" style="color:${isDMais || isUsual ? "#ccc" : "#999"}">${r.team}</td>
+      <td class="pts-cell" style="color:${ptsColor}">${r.pts}</td>
+      <td class="bar-cell">
+        <div class="bar-bg"><div class="bar-fill" data-width="${barWidth}" style="background:${barColor}"></div></div>
+      </td>
+    </tr>`;
+          })
+          .join("");
+        requestAnimationFrame(() => {
+          document.querySelectorAll(".bar-fill").forEach((el) => {
+            el.style.width = el.dataset.width + "%";
+          });
+        });
+      }
+
+      renderRaceTable("race1-body", race1Results);
+      renderRaceTable("race2-body", race2Results);
+      renderChampionship();
+    </script>
+  </body>
+</html>
